@@ -16,12 +16,7 @@ export const UNIFIED_RULES = [
 		site_rules: ['openai', 'anthropic','jetbrains-ai','perplexity'],
 		ip_rules: []
 	},
-	{
-		name: 'Bilibili',
-		outbound: '📺 哔哩哔哩',
-		site_rules: ['bilibili'],
-		ip_rules: []
-	},
+	
 	{
 		name: 'Youtube',
 		outbound: '📹 油管视频',
@@ -71,43 +66,15 @@ export const UNIFIED_RULES = [
 		site_rules: ['apple'],
 		ip_rules: []
 	},
-	{
-		name: 'Bahamut',
-		outbound: '🎮 巴哈姆特',
-		site_rules: ['bahamut'],
-		ip_rules: []
-	},
 
-	{
-		name: 'Social Media',
-		outbound: '🌐 社交媒体',
-		site_rules: ['facebook', 'instagram', 'twitter', 'tiktok', 'linkedin'],
-		ip_rules: []
-	  },
 	  {
 		name: 'Streaming',
 		outbound: '🎬 流媒体',
 		site_rules: ['netflix', 'hulu', 'disney', 'hbo', 'amazon'],
 		ip_rules: []
 	  },
-	  {
-		name: 'Gaming',
-		outbound: '🎮 游戏平台',
-		site_rules: ['steam', 'epicgames', 'ea', 'ubisoft', 'blizzard'],
-		ip_rules: []
-	  },
-	  {
-		name: 'Education',
-		outbound: '📚 教育资源',
-		site_rules: ['coursera', 'edx', 'udemy', 'khanacademy', 'category-scholar-!cn'],
-		ip_rules: []
-	  },
-	  {
-		name: 'Financial',
-		outbound: '💰 金融服务',
-		site_rules: ['paypal', 'visa', 'mastercard','stripe','wise'],
-		ip_rules: []
-	  },
+	
+
 	  {
 		name: 'Cloud Services',
 		outbound: '☁️ 云服务',
@@ -220,7 +187,7 @@ export function generateRuleSets(selectedRules = [], customRules = []) {
     type: 'remote',
     format: 'binary',
     url: `${SITE_RULE_SET_BASE_URL}${SITE_RULE_SETS[rule]}`,
-    download_detour: '⚡ 自动选择'
+    download_detour: '⚡ Auto'
   }));
 
   const ip_rule_sets = Array.from(ipRuleSets).map(rule => ({
@@ -228,7 +195,7 @@ export function generateRuleSets(selectedRules = [], customRules = []) {
     type: 'remote',
     format: 'binary',
     url: `${IP_RULE_SET_BASE_URL}${IP_RULE_SETS[rule]}`,
-    download_detour: '⚡ 自动选择'
+    download_detour: '⚡ Auto'
   }));
 
   if(customRules){
@@ -240,7 +207,7 @@ export function generateRuleSets(selectedRules = [], customRules = []) {
 					type: 'remote',
 					format: 'binary',
 					url: `${SITE_RULE_SET_BASE_URL}geosite-${site.trim()}.srs`,
-					download_detour: '⚡ 自动选择'
+					download_detour: '⚡ Auto'
 				});
 			});
 		}
@@ -251,7 +218,7 @@ export function generateRuleSets(selectedRules = [], customRules = []) {
 					type: 'remote',
 					format: 'binary',
 					url: `${IP_RULE_SET_BASE_URL}geoip-${ip.trim()}.srs`,
-					download_detour: '⚡ 自动选择'
+					download_detour: '⚡ Auto'
 				});
 			});
 		}
