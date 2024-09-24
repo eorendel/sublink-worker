@@ -31,7 +31,7 @@ export class ClashConfigBuilder extends BaseConfigBuilder {
         const proxyList = this.config.proxies.map(proxy => proxy.name);
         
         this.config['proxy-groups'].push({
-            name: '⚡ 自动选择',
+            name: '⚡ Auto',
             type: 'url-test',
             proxies: DeepCopy(proxyList),
             url: 'https://www.gstatic.com/generate_204',
@@ -39,15 +39,15 @@ export class ClashConfigBuilder extends BaseConfigBuilder {
             lazy: false
         });
 
-        proxyList.unshift('DIRECT', 'REJECT', '⚡ 自动选择');
-        outbounds.unshift('🚀 节点选择');
+        proxyList.unshift('DIRECT', 'REJECT', '⚡ Auto');
+        outbounds.unshift('🚀 Select');
         
         outbounds.forEach(outbound => {
-            if (outbound !== '🚀 节点选择') {
+            if (outbound !== '🚀 Select') {
                 this.config['proxy-groups'].push({
                     type: "select",
                     name: outbound,
-                    proxies: ['🚀 节点选择', ...proxyList]
+                    proxies: ['🚀 Select', ...proxyList]
                 });
             } else {
                 this.config['proxy-groups'].unshift({
@@ -63,15 +63,15 @@ export class ClashConfigBuilder extends BaseConfigBuilder {
                 this.config['proxy-groups'].push({
                     type: "select",
                     name: rule.name,
-                    proxies: ['🚀 节点选择', ...proxyList]
+                    proxies: ['🚀 Select', ...proxyList]
                 });
             });
         }
 
         this.config['proxy-groups'].push({
             type: "select",
-            name: "🐟 漏网之鱼",
-            proxies: ['🚀 节点选择', ...proxyList]
+            name: "🐟 Other",
+            proxies: ['🚀 Select', ...proxyList]
         });
     }
     formatConfig() {
@@ -86,7 +86,7 @@ export class ClashConfigBuilder extends BaseConfigBuilder {
         });
 
         // Add the final catch-all rule
-        this.config.rules.push('MATCH,🐟 漏网之鱼');
+        this.config.rules.push('MATCH,🐟 Other');
 
         return yaml.dump(this.config);
     }
