@@ -28,19 +28,19 @@ export class ConfigBuilder extends BaseConfigBuilder {
 
         this.config.outbounds.unshift({
             type: "urltest",
-            tag: "⚡ 自动选择",
+            tag: "⚡ Auto",
             outbounds: DeepCopy(proxyList),
         });
 
-        proxyList.unshift('DIRECT', 'REJECT', '⚡ 自动选择');
-        outbounds.unshift('🚀 节点选择','GLOBAL');
+        proxyList.unshift('DIRECT', 'REJECT', '⚡ Auto');
+        outbounds.unshift('🚀 Select','GLOBAL');
         
         outbounds.forEach(outbound => {
-            if (outbound !== '🚀 节点选择') {
+            if (outbound !== '🚀 Select') {
                 this.config.outbounds.push({
                     type: "selector",
                     tag: outbound,
-                    outbounds: ['🚀 节点选择', ...proxyList]
+                    outbounds: ['🚀 Select', ...proxyList]
                 });
             } else {
                 this.config.outbounds.unshift({
@@ -56,15 +56,15 @@ export class ConfigBuilder extends BaseConfigBuilder {
                 this.config.outbounds.push({
                     type: "selector",
                     tag: rule.name,
-                    outbounds: ['🚀 节点选择', ...proxyList]
+                    outbounds: ['🚀 Select', ...proxyList]
                 });
             });
         }
 
         this.config.outbounds.push({
             type: "selector",
-            tag: "🐟 漏网之鱼",
-            outbounds: ['🚀 节点选择', ...proxyList]
+            tag: "🐟 Other",
+            outbounds: ['🚀 Select', ...proxyList]
         });
     }
 
@@ -91,7 +91,7 @@ export class ConfigBuilder extends BaseConfigBuilder {
         );
 
         this.config.route.auto_detect_interface = true;
-        this.config.route.final = '🐟 漏网之鱼';
+        this.config.route.final = '🐟 Other';
 
         return this.config;
     }
